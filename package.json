@@ -35,7 +35,8 @@
     "@octokit/rest": "^21.0.2",
     "nock": "^13.5.5",
     "webpack": "^5.94.0",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",

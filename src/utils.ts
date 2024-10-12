@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import {Transformer} from './testParser'
 import {SummaryTableRow} from '@actions/core/lib/summary'
+import _ from 'lodash';
 
 export function retrieve(name: string, items: string[], index: number, total: number): string {
   if (total > 1) {
@@ -36,7 +37,8 @@ export function readTransformers(raw: string | undefined): Transformer[] {
     const transformers: Transformer[] = JSON.parse(raw)
     for (const transformer of transformers) {
       try {
-        transformer.regex = new RegExp(transformer.searchValue.replace('\\\\', '\\'), 'gu')
+        const safeSearchValue = _.escapeRegExp(transformer.searchValue.replace('\\\\', '\\'));
+        transformer.regex = new RegExp(safeSearchValue, 'gu')
       } catch (error) {
         core.warning(`⚠️ Bad replacer regex: ${transformer.searchValue}`)
       }
